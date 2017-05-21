@@ -1,18 +1,20 @@
-import arrows
-import pyaudio
+import pyautogui
+import snowboydecoder
 
-audio = pyaudio.PyAudio()
 
-FORMAT = pyaudio.paInt16
-CHANNELS = 2
-RATE = 44100
-CHUNK = 1024
-RECORD_SECONDS = 2
-WAVE_OUTPUT_FILENAME = "file.wav"
+def left_key_press():
+    pyautogui.press('left')
 
-audio = pyaudio.PyAudio()
 
-# start Recording
-stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+def right_key_press():
+    pyautogui.press('right')
 
-print(stream)
+
+def main():
+    next_detector = snowboydecoder.HotwordDetector("models/next_slide.pmdl", sensitivity=0.5, audio_gain=1)
+    previous_detector = snowboydecoder.HotwordDetector("models/previous_slide.pmdl", sensitivity=0.5, audio_gain=1)
+    next_detector.start(right_key_press)
+    previous_detector.start(left_key_press)
+
+if __name__=='__main__':
+    main()

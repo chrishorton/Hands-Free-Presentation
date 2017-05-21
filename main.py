@@ -1,7 +1,7 @@
 import pyautogui
 import snowboydecoder
 import threading
-
+import time
 
 class DetectorThread (threading.Thread):
     def __init__(self, detector, callback):
@@ -30,4 +30,4 @@ next_thread.start()
 previous_thread.start()
 
 while True:
-    pass
+    time.sleep(100)

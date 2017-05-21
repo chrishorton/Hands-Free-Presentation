@@ -5,7 +5,7 @@ import threading
 
 class DetectorThread (threading.Thread):
     def __init__(self, detector):
-        super.__init__(self)
+        threading.Thread.__init__(self)
         self.detector = detector
 
     def run(self):

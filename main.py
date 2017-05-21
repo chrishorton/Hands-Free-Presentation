@@ -1,40 +1,41 @@
 import pyautogui
-from snowboy import snowboydecoder
-import threading
-import time
+import snowboydecoder
+import signal
 
-
-class DetectorThread (threading.Thread):
-    """
-    Thread class for the separate detectors to detect simultaneously
-    """
-    def __init__(self, detector, callback):
-        threading.Thread.__init__(self)
-        self.detector = detector
-        self.callback = callback
-        self.daemon = True
-
-    def run(self):
-        self.detector.start(self.callback)
+interrupted = False
 
 
 def left_key_press():
     pyautogui.press('left')
+    print("Heard previous slide - executing left key press")
 
 
 def right_key_press():
     pyautogui.press('right')
+    print("Heard next slide - executing right key press")
 
-next_slide_detector = snowboydecoder.HotwordDetector("models/next_slide.pmdl", sensitivity=0.5, audio_gain=1)
-previous_slide_detector = snowboydecoder.HotwordDetector("models/previous_slide.pmdl", sensitivity=0.5, audio_gain=1)
 
-next_slide_thread = DetectorThread(next_slide_detector, right_key_press)
-previous_slide_thread = DetectorThread(previous_slide_detector, left_key_press)
+def signal_handler(signal_received, frame):
+    global interrupted
+    interrupted = True
 
-next_slide_thread.start()
-previous_slide_thread.start()
 
-# Hack to keep main thread running, as since the child threads are daemon threads, main thread can terminate them
-while True:
-    # Hack to reduce CPU usage significantly
-    time.sleep(100)
+def interrupt_callback():
+    global interrupted
+    return interrupted
+
+# Capture and handle CTRL-C
+signal.signal(signal.SIGINT, signal_handler)
+
+models = ["models/next_slide.pmdl", "models/previous_slide.pmdl"]
+sensitivity_args = [0.5] * len(models)
+callbacks = [right_key_press, left_key_press]
+detector = snowboydecoder.HotwordDetector(models, sensitivity=sensitivity_args)
+
+print('Now listening for hot words "Next Slide" and "Previous Slide"')
+
+detector.start(detected_callback=callbacks,
+               interrupt_check=interrupt_callback)
+
+detector.terminate()
+print("Quitting program...")

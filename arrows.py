@@ -1,5 +1,6 @@
-mport sys,tty,termios
+import sys,tty,termios
 class _Getch:
+    @property
     def __call__(self):
             fd = sys.stdin.fileno()
             old_settings = termios.tcgetattr(fd)
@@ -32,3 +33,5 @@ def main():
 
 if __name__=='__main__':
         main()
+
+

@@ -1,5 +1,5 @@
 import pyautogui
-import snowboydecoder
+from snowboy import snowboydecoder
 import signal
 
 interrupted = False

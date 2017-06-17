@@ -47,10 +47,11 @@ class Detectors(object):
 def signal_handler(signal_received, frame):
     detectors.stop_detecting()
 
-# Capture and handle CTRL-C
-signal.signal(signal.SIGINT, signal_handler)
+if __name__ == '__main__':
+    # Capture and handle CTRL-C
+    signal.signal(signal.SIGINT, signal_handler)
 
-detectors = Detectors()
-detectors.start_detecting()
+    detectors = Detectors()
+    detectors.start_detecting()
 
-print("Quitting program...")
+    print("Quitting program...")

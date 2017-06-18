@@ -2,9 +2,17 @@
 import Tkinter as tk
 import detectors
 import signal
+import pyautogui
 
-root = tk.Tk()
-root.title = "Advance your PowerPoint Slides"
+
+def left_key_press():
+    pyautogui.press('left')
+    print('Heard "previous slide" - executing left key press')
+
+
+def right_key_press():
+    pyautogui.press('right')
+    print('Heard "next slide" - executing right key press')
 
 
 def toggle_detect():
@@ -12,7 +20,7 @@ def toggle_detect():
     # If recognition is not currently running
     if not recognition.is_running():
         print("Starting recognition...")
-        recognition.start_recog()
+        recognition.start_recog(callbacks)
         button["text"] = "Stop Detection"
     else:
         print("Stopping recognition...")
@@ -29,10 +37,13 @@ signal.signal(signal.SIGINT, signal_handler)
 # Initialize thread to run detectors
 models = ["models/next_slide.pmdl", "models/previous_slide.pmdl"]
 sensitivity = 0.5
-recognition = detectors.Detectors(models, sensitivity)
+callbacks = [right_key_press, left_key_press]
+recognition = detectors.Detectors(models, sensitivity=sensitivity)
 recognition.start()
 
 # Set up GUI
+root = tk.Tk()
+root.title = "Advance your PowerPoint Slides"
 button = tk.Button(root, text="Start Recognition", width=25, command=toggle_detect)
 button.pack()
 root.mainloop()

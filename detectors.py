@@ -1,17 +1,6 @@
-import pyautogui
 from snowboy import snowboydecoder
 import threading
 import Queue
-
-
-def left_key_press():
-    pyautogui.press('left')
-    print('Heard "previous slide" - executing left key press')
-
-
-def right_key_press():
-    pyautogui.press('right')
-    print('Heard "next slide" - executing right key press')
 
 
 class Detectors(threading.Thread):
@@ -20,21 +9,25 @@ class Detectors(threading.Thread):
     and provide methods to pause, resume, and modify detection
     """
 
-    def __init__(self, models, sensitivity=0.5):
+    def __init__(self, models, **kwargs):
+        """
+        Initialize Detectors object. **kwargs is for any __init__ keyword arguments to be passed into HotWordDetector
+        __init__() function.
+        """
         threading.Thread.__init__(self)
         self.models = models
-        self.sensitivity = [sensitivity] * len(self.models)
+        self.init_args = kwargs
         self.interrupted = True
         self.commands = Queue.Queue()
-        self.callbacks = [right_key_press, left_key_press]
         self.vars_are_changed = True
         self.detectors = None  # Initialize when thread is run
+        self.run_args = None  # Initialize when detectors start
 
     def initialize_detectors(self):
         """
         Returns initialized Snowboy HotwordDetector objects
         """
-        return snowboydecoder.HotwordDetector(self.models, sensitivity=self.sensitivity)
+        self.detectors = snowboydecoder.HotwordDetector(self.models, **self.init_args)
 
     def run(self):
         """
@@ -46,12 +39,11 @@ class Detectors(threading.Thread):
                 if command == "Start":
                     self.interrupted = False
                     if self.vars_are_changed:
-                        self.detectors = self.initialize_detectors()
+                        self.initialize_detectors()
                         self.vars_are_changed = False
                     print('Now listening for hot words "Next Slide" and "Previous Slide"')
                     # Start detectors - blocks until interrupted by self.interrupted variable
-                    self.detectors.start(detected_callback=self.callbacks,
-                                         interrupt_check=lambda: self.interrupted)
+                    self.detectors.start(interrupt_check=lambda: self.interrupted, **self.run_args)
 
                     print('Command recognition stopped.')
                 elif command == "Terminate":
@@ -60,10 +52,12 @@ class Detectors(threading.Thread):
         finally:
             self.detectors.terminate()
 
-    def start_recog(self):
+    def start_recog(self, callbacks, sleep_time=0.03):
         """
-        Starts recognition in thread
+        Starts recognition in thread. Accepts optional to pass into the HotWordDetector.start() function, but
+        does not accept interrupt_callback
         """
+        self.run_args = {"detected_callback": callbacks, "sleep_time": 0.03}
         self.commands.put("Start")
 
     def stop_recog(self):
@@ -86,9 +80,9 @@ class Detectors(threading.Thread):
         if self.is_running():
             print("Cannot modify detectors while running")
             return
+        if models is not list:
+            models = [models]
         self.models = models
-        self.callbacks = right_key_press
-        self.sensitivity = 0.5
         self.vars_are_changed = True
         print("Changed models")
 
@@ -98,6 +92,6 @@ class Detectors(threading.Thread):
             return
         if sensitivity is not list:
             sensitivity = [sensitivity] * len(self.models)
-        self.sensitivity = sensitivity
+        self.init_args['sensitivity'] = sensitivity
         self.vars_are_changed = True
         print("Changed sensitivity")

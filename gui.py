@@ -1,23 +1,40 @@
 import Tkinter as tk
-import main
+import detectors
+import signal
 
 root = tk.Tk()
 root.title = "Advance your PowerPoint Slides"
 
-def start_recog():
-    '''Starts main recognition thread with options specified from drag gui elements'''
-    print("Starting recognition...")
-    main.start_recognition()
+
+def toggle_detect():
+    """Toggles detection between on and off"""
+    # If recognition is not currently running
+    if not recognition.is_running():
+        print("Starting recognition...")
+        recognition.start_recog()
+        button["text"] = "Stop Detection"
+    else:
+        print("Stopping recognition...")
+        recognition.stop_recog()
+        button["text"] = "Start Detection"
 
 
+def signal_handler(signal_received, frame):
+    print("Signal handler")
+    root.destroy()
 
+signal.signal(signal.SIGINT, signal_handler)
 
-def start_button(button):
-    def start_listener():
-        button.pack()
+# Initialize thread to run detectors
+models = ["models/next_slide.pmdl", "models/previous_slide.pmdl"]
+sensitivity = 0.5
+recognition = detectors.Detectors(models, sensitivity)
+recognition.start()
 
-
-button = tk.Button(root, text="Start", width=25,command=start_recog)
-start_button(button)
+# Set up GUI
+button = tk.Button(root, text="Start Recognition", width=25, command=toggle_detect)
 button.pack()
 root.mainloop()
+# End recognition and its thread
+print("Terminating program")
+recognition.terminate()

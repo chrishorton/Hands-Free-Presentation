@@ -27,7 +27,8 @@ class Detectors(threading.Thread):
         self.interrupted = True
         self.commands = Queue.Queue()
         self.callbacks = [right_key_press, left_key_press]
-        self.detectors = self.initialize_detectors()
+        self.vars_are_changed = True
+        self.detectors = None  # Initialize when thread is run
 
     def initialize_detectors(self):
         """
@@ -44,6 +45,9 @@ class Detectors(threading.Thread):
                 command = self.commands.get(True)
                 if command == "Start":
                     self.interrupted = False
+                    if self.vars_are_changed:
+                        self.detectors = self.initialize_detectors()
+                        self.vars_are_changed = False
                     print('Now listening for hot words "Next Slide" and "Previous Slide"')
                     # Start detectors - blocks until interrupted by self.interrupted variable
                     self.detectors.start(detected_callback=self.callbacks,
@@ -83,11 +87,17 @@ class Detectors(threading.Thread):
             print("Cannot modify detectors while running")
             return
         self.models = models
-        self.detectors = self.initialize_detectors()
+        self.callbacks = right_key_press
+        self.sensitivity = 0.5
+        self.vars_are_changed = True
+        print("Changed models")
 
     def change_sensitivity(self, sensitivity):
         if self.is_running():
             print("Cannot modify detectors while running")
             return
-        self.sensitivity = [sensitivity] * len(self.models)
-        self.detectors = self.initialize_detectors()
+        if sensitivity is not list:
+            sensitivity = [sensitivity] * len(self.models)
+        self.sensitivity = sensitivity
+        self.vars_are_changed = True
+        print("Changed sensitivity")

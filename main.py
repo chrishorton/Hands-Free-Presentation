@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import Tkinter as tk
 import detectors
 import signal
@@ -20,7 +21,7 @@ def toggle_detect():
 
 
 def signal_handler(signal_received, frame):
-    print("Signal handler")
+    print("Signal handler - SIGINT")
     root.destroy()
 
 signal.signal(signal.SIGINT, signal_handler)

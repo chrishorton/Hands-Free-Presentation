@@ -1,57 +1,41 @@
-import pyautogui
-from snowboy import snowboydecoder
+#!/usr/bin/env python
+import Tkinter as tk
+import detectors
 import signal
 
-
-def left_key_press():
-    pyautogui.press('left')
-    print('Heard "previous slide" - executing left key press')
+root = tk.Tk()
+root.title = "Advance your PowerPoint Slides"
 
 
-def right_key_press():
-    pyautogui.press('right')
-    print('Heard "next slide" - executing right key press')
-
-
-class Detectors(object):
-    """
-    Wrapper class around detectors to incorporate methods and data
-    """
-
-    def __init__(self, detect_models=None, sensitivity=None):
-        if detect_models is not None:
-            self.models = detect_models
-        else:
-            self.models = ["models/next_slide.pmdl", "models/previous_slide.pmdl"]
-
-        if sensitivity is not None:
-            self.sensitivity_args = sensitivity
-        else:
-            self.sensitivity_args = [0.5] * len(self.models)
-
-        self.interrupted = False
-        self.callbacks = [right_key_press, left_key_press]
-        self.detectors = snowboydecoder.HotwordDetector(self.models, sensitivity=self.sensitivity_args)
-
-    def start_detecting(self):
-        print('Now listening for hot works "Next Slide" and "Previous Slide"')
-        self.interrupted = False
-        self.detectors.start(detected_callback=self.callbacks,
-                             interrupt_check=lambda: self.interrupted)
-        self.detectors.terminate()
-
-    def stop_detecting(self):
-        self.interrupted = True
+def toggle_detect():
+    """Toggles detection between on and off"""
+    # If recognition is not currently running
+    if not recognition.is_running():
+        print("Starting recognition...")
+        recognition.start_recog()
+        button["text"] = "Stop Detection"
+    else:
+        print("Stopping recognition...")
+        recognition.stop_recog()
+        button["text"] = "Start Detection"
 
 
 def signal_handler(signal_received, frame):
-    detectors.stop_detecting()
+    print("Signal handler - SIGINT")
+    root.destroy()
 
-if __name__ == '__main__':
-    # Capture and handle CTRL-C
-    signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
-    detectors = Detectors()
-    detectors.start_detecting()
+# Initialize thread to run detectors
+models = ["models/next_slide.pmdl", "models/previous_slide.pmdl"]
+sensitivity = 0.5
+recognition = detectors.Detectors(models, sensitivity)
+recognition.start()
 
-    print("Quitting program...")
+# Set up GUI
+button = tk.Button(root, text="Start Recognition", width=25, command=toggle_detect)
+button.pack()
+root.mainloop()
+# End recognition and its thread
+print("Terminating program")
+recognition.terminate()

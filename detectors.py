@@ -68,7 +68,7 @@ class Detectors(threading.Thread):
 
     def stop_recog(self):
         """
-        Stops recognition in thread
+        Halts recognition in thread.
         """
         self.interrupted = True
 
@@ -83,15 +83,13 @@ class Detectors(threading.Thread):
         return not self.interrupted
 
     def change_models(self, models):
-        assert not self.is_running, "Cannot modify detectors while running"
-        if models is not list:
-            models = [models]
+        if self.is_running():
+            print("Models will be changed after stopping and starting detectors.")
         self.models = models
         self.vars_are_changed = True
 
     def change_sensitivity(self, sensitivity):
-        assert not self.is_running, "Cannot modify detectors while running"
-        if sensitivity is not list:
-            sensitivity = [sensitivity] * len(self.models)
+        if self.is_running():
+            print("Sensitivity will be changed after stopping and starting detectors.")
         self.init_kwargs['sensitivity'] = sensitivity
         self.vars_are_changed = True

@@ -20,7 +20,7 @@ def toggle_detect():
     # If recognition is not currently running
     if not recognition.is_running():
         print("Starting recognition...")
-        recognition.start_recog(callbacks)
+        recognition.start_recog(detected_callback=callbacks)
         button["text"] = "Stop Detection"
     else:
         print("Stopping recognition...")

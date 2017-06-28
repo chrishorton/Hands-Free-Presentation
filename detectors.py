@@ -1,4 +1,9 @@
-from snowboy import snowboydecoder
+import sys
+with open(".snowboy_package") as snowboy_dest:
+    snowboy_package = snowboy_dest.read().strip()
+    sys.path.append(snowboy_package)
+
+import snowboydecoder
 import threading
 import Queue
 

@@ -1,5 +1,5 @@
 import sys
-with open(".snowboy_package") as snowboy_dest:
+with open(".snowboy_path", "r'") as snowboy_dest:
     snowboy_package = snowboy_dest.read().strip()
     sys.path.append(snowboy_package)
 

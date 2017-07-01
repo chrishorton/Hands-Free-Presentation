@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-if [ -e .snowboy_package ]
+if ! [ -e .snowboy_path ]
 then
-    python main.py
-else
+    echo "Running setup..."
     python setup.py
 fi
+echo "Starting program..."
+python main.py

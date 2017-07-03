@@ -15,6 +15,7 @@ Snowboy's dependencies are documented [here](https://github.com/Kitt-AI/snowboy/
 
 **OSX Installation**
 
+Open up a terminal and run:
 ```bash
 brew install swig portaudio sox
 pip install pyaudio
@@ -26,6 +27,8 @@ pip install pyautogui
 If you do not have Homebrew installed, please download it [here](http://brew.sh/). If you don't have `pip`, you can install it [here](https://pip.pypa.io/en/stable/installing/).
 
 **Ubuntu Installation**
+
+Open up a terminal and run:
 ```bash
 sudo apt-get install swig3.0 sox portaudio19-dev
 pip install pyaudio

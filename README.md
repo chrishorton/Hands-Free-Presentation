@@ -32,6 +32,7 @@ Open up a terminal and run:
 ```bash
 sudo apt-get install swig3.0 sox portaudio19-dev
 pip install pyaudio
+sudo apt-get install libatlas-base-dev
 sudo apt-get install python-dev
 sudo apt-get install python-xlib python-tk
 pip install pyautogui

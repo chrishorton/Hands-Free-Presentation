@@ -33,10 +33,11 @@ class ModelSelect(tk.Frame):
             title="Select Next Slide Model",
             filetypes=(("Snowboy Models", "*.pmdl *.umdl"), ("All Files", "*.*"))
         )
-        file_name = os.path.basename(file_path)
-        self.model_paths[0] = file_path
-        self.next_model_str.set("Next Slide model: {}".format(file_name))
-        self.model_edit_callback()
+        if file_path:
+            file_name = os.path.basename(file_path)
+            self.model_paths[0] = file_path
+            self.next_model_str.set("Next Slide model: {}".format(file_name))
+            self.model_edit_callback()
 
     def get_previous_slide_model(self):
         file_path = tkFileDialog.askopenfilename(
@@ -44,10 +45,11 @@ class ModelSelect(tk.Frame):
             title="Select Previous Slide Model",
             filetypes=(("Snowboy Models", "*.pmdl *.umdl"), ("All Files", "*.*"))
         )
-        file_name = os.path.basename(file_path)
-        self.model_paths[1] = file_path
-        self.prev_model_str.set("Previous Slide model: {}".format(file_name))
-        self.model_edit_callback()
+        if file_path:
+            file_name = os.path.basename(file_path)
+            self.model_paths[1] = file_path
+            self.prev_model_str.set("Previous Slide model: {}".format(file_name))
+            self.model_edit_callback()
 
     def disable(self):
         self.next_model_button["state"] = tk.DISABLED
@@ -79,6 +81,7 @@ class DetectApp(tk.Frame):
             self,
             text="Start Recognition",
             width=25,
+            height=2,
             command=self.toggle_detect
         )
         self.toggle_button.grid(row=0, column=0, columnspan=2)

@@ -1,6 +1,0 @@
-{
-  "models": [
-    "./models/ex_next_slide.pmdl",
-    "./models/ex_previous_slide.pmdl"],
-  "sensitivity": 0.5
-}

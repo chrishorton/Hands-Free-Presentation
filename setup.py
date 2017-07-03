@@ -1,4 +1,5 @@
 import platform
+import json
 
 platform_info = platform.system()
 if platform_info in ("Windows", "Microsoft"):
@@ -39,5 +40,13 @@ else:
 
 with open(".snowboy_path", "w") as package_file:
     package_file.write(snowboy_package_dest)
+
+
+json_data = {
+    "models": ["./models/ex_next_slide.pmdl", "./models/ex_previous_slide.pmdl"],
+    "sensitivity": 0.5
+}
+with open("config.json", "w") as json_file:
+    json.dump(json_data, json_file)
 
 print("Setup successful!")

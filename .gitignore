@@ -1,2 +1,5 @@
 # Path to import appropriate snowboy package from, based on system - created by setup.py
 .snowboy_path
+
+# JSON file to store data for Snowboy detectors
+config.json

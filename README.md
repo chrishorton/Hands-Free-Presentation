@@ -6,7 +6,7 @@ A useful application that allows you to deliver presentations solely with your v
 * [Snowboy](https://snowboy.kitt.ai/) - hotword detection 
 * [PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/) - sending soft keypresses to manipulate presentations 
 
-Unfortunately, Snowboy currently is not supported on Windows, therefore making this application unavailable on Windows as of right now. However, if you are running OSX or an Ubuntu-based system, this application will work just fine.
+Unfortunately, Snowboy currently is not supported on Windows, therefore making this application unavailable on Windows as of right now. However, if you are running OSX or an Ubuntu-based system, this application will work just fine. It may be possible to run on Windows by following the Ubuntu installation instructions using Bash on Windows, but that is currently untested.
 
 
 Both Snowboy and PyAutoGUI require their own dependencies. Instructions for installation are listed below, or you can use the following links. 
@@ -23,6 +23,7 @@ pip install pyobjc-core
 pip install pyobjc
 pip install pyautogui
 ```
+Depending on your system, you may have to run `sudo pip install` rather than `pip install`.
 
 If you do not have Homebrew installed, please download it [here](http://brew.sh/). If you don't have `pip`, you can install it [here](https://pip.pypa.io/en/stable/installing/).
 
@@ -38,7 +39,7 @@ sudo apt-get install python-xlib python-tk
 pip install pyautogui
 ```
 
-Depending on how your Ubuntu system is set up, you may have to run `sudo pip install` rather than `pip install`.
+Again, epending on how your system is set up, you may have to run `sudo pip install` rather than `pip install`.
 
 If you run into issues installing these dependencies, please look at the documentations for Snowboy and PyAutoGUI linked above. If you still cannot install them, post an issue on this Github.
 

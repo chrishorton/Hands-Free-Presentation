@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import Tkinter as tk
 from app import DetectApp
+import os
 import detectors
 import signal
 import pyautogui
@@ -32,6 +33,7 @@ with open("config.json", "r") as json_data:
 models = detection_data["models"]
 sensitivity = detection_data["sensitivity"]
 callbacks = [right_key_press, left_key_press]
+resource = os.path.abspath("./resources/common.res")
 recognition = detectors.Detectors(models, sensitivity=sensitivity)
 recognition.start()
 

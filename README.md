@@ -1,7 +1,7 @@
 # Hands-Free Presentation
 A useful application that allows you to deliver presentations solely with your voice. Move between slides using hotwords rather than your laptop's arrow keys or a clicker.
 
-##Installation
+##  Installation
 * Python 2.7 - Python 3 is currently not supported
 * [Snowboy](https://snowboy.kitt.ai/) - hotword detection 
 * [PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/) - sending soft keypresses to manipulate presentations 
@@ -38,7 +38,7 @@ Depending on how your Ubuntu system is set up, you may have to run `sudo pip ins
 
 If you run into issues installing these dependencies, please look at the documentations for Snowboy and PyAutoGUI linked above. If you still cannot install them, post an issue on this Github.
 
-##Usage
+## Usage
 To download this application, use the **Clone or Download** button at the top-right corner of this page. You can either download it as a ZIP and then extract it, or you can clone the repository if your system has git installed.
 
 Since we do not have universal Snowboy models available yet, you need personal Snowboy models for detecting the hotwords **Next Slide** and **Previous Slide** to use this application. The application ships with two example models, but they are personal models that are not likely to work well with your voice. To make your own personal models, first create an account on [Snowboy](snowboy.kitt.ai). Then, record three voice samples for the [Next Slide Model](https://snowboy.kitt.ai/hotword/7485) and [Previous Slide Model](https://snowboy.kitt.ai/hotword/7486). For best results, record in a fairly silent environment with the same microphone each time, and make sure to record yourself saying the hotwords as similarly as possible to how you would say them in a presentation. Submitting your own voice samples also helps us progress towards obtaining universal Snowboy models, and makes our hotword detection better.

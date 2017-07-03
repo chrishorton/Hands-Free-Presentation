@@ -1,5 +1,6 @@
 import platform
 import json
+import os
 
 platform_info = platform.system()
 if platform_info in ("Windows", "Microsoft"):
@@ -43,8 +44,12 @@ with open(".snowboy_path", "w") as package_file:
 
 
 json_data = {
-    "models": ["./models/ex_next_slide.pmdl", "./models/ex_previous_slide.pmdl"],
-    "sensitivity": 0.5
+    "models": [
+        os.path.abspath("./models/ex_next_slide.pmdl"),
+        os.path.abspath("./models/ex_previous_slide.pmdl")
+    ],
+    "sensitivity": 0.5,
+    "resource": os.path.abspath("./resources/common.res")
 }
 with open("config.json", "w") as json_file:
     json.dump(json_data, json_file)

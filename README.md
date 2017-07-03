@@ -2,7 +2,7 @@
 A useful application that allows you to deliver presentations solely with your voice. Move between slides using hotwords rather than your laptop's arrow keys or a clicker.
 
 ##  Installation
-* Python 2.7 - Python 3 is currently not supported
+* [Python 2.7](https://www.python.org/downloads/) - Python 3 is currently not supported
 * [Snowboy](https://snowboy.kitt.ai/) - hotword detection 
 * [PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/) - sending soft keypresses to manipulate presentations 
 

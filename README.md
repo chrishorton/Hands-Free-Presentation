@@ -39,7 +39,7 @@ sudo apt-get install python-xlib python-tk
 pip install pyautogui
 ```
 
-Again, epending on how your system is set up, you may have to run `sudo pip install` rather than `pip install`.
+Again, depending on how your system is set up, you may have to run `sudo pip install` rather than `pip install`.
 
 If you run into issues installing these dependencies, please look at the documentations for Snowboy and PyAutoGUI linked above. If you still cannot install them, post an issue on this Github.
 

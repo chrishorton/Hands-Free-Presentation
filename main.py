@@ -38,10 +38,10 @@ recognition.start()
 
 # Set up GUI
 root = tk.Tk()
-root.resizable(0, 0)
-root.title = "Hands-Free Presentation"
+root.resizable(0, 0)  # Prevents resizing of GUI
+root.title("Hands-Free Presentation")
 app = DetectApp(root, models, sensitivity, recognition, callbacks)
-root.mainloop()  # Blocks until GUI is closed
+root.mainloop()  # Blocks until GUI is terminated
 
 # End recognition and its thread
 print("Terminating program")

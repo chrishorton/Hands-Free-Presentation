@@ -1,1 +1,6 @@
-{"models": ["/home/rohan/Code_Projects/Hackathons/CodeDay/Hands-Free-Presentation/models/ex_next_slide.pmdl", "./models/ex_previous_slide.pmdl"], "sensitivity": 0.5}
+{
+  "models": [
+    "./models/ex_next_slide.pmdl",
+    "./models/ex_previous_slide.pmdl"],
+  "sensitivity": 0.5
+}

@@ -1,31 +1,31 @@
-import Tkinter as tk
+import Tkinter as Tk
 import tkFileDialog
 import os
 
 
-class ModelSelect(tk.Frame):
+class ModelSelect(Tk.Frame):
     """
     Frame for buttons and labels to choose models
     """
     def __init__(self, parent, models, model_edit_callback):
-        tk.Frame.__init__(self, parent)
+        Tk.Frame.__init__(self, parent)
         self.model_paths = models
         self.model_edit_callback = model_edit_callback
-        self.next_model_str = tk.StringVar()
+        self.next_model_str = Tk.StringVar()
         self.next_model_str.set("Next Slide model: {}".format(os.path.basename(models[0])))
-        self.prev_model_str = tk.StringVar()
+        self.prev_model_str = Tk.StringVar()
         self.prev_model_str.set("Previous Slide model: {}".format(os.path.basename(models[1])))
         self.init_ui()
 
     def init_ui(self):
-        self.next_model_label = tk.Label(self, textvariable=self.next_model_str)
-        self.next_model_label.grid(row=0, column=0, sticky=tk.E, padx=5)
-        self.prev_model_label = tk.Label(self, textvariable=self.prev_model_str)
-        self.prev_model_label.grid(row=1, column=0, sticky=tk.E, padx=5)
-        self.next_model_button = tk.Button(self, text="Choose model", command=self.get_next_slide_model)
-        self.next_model_button.grid(row=0, column=1, sticky=tk.W, padx=5)
-        self.prev_model_button = tk.Button(self, text="Choose model", command=self.get_previous_slide_model)
-        self.prev_model_button.grid(row=1, column=1, sticky=tk.W, padx=5)
+        self.next_model_label = Tk.Label(self, textvariable=self.next_model_str)
+        self.next_model_label.grid(row=0, column=0, sticky=Tk.E, padx=5)
+        self.prev_model_label = Tk.Label(self, textvariable=self.prev_model_str)
+        self.prev_model_label.grid(row=1, column=0, sticky=Tk.E, padx=5)
+        self.next_model_button = Tk.Button(self, text="Choose model", command=self.get_next_slide_model)
+        self.next_model_button.grid(row=0, column=1, sticky=Tk.W, padx=5)
+        self.prev_model_button = Tk.Button(self, text="Choose model", command=self.get_previous_slide_model)
+        self.prev_model_button.grid(row=1, column=1, sticky=Tk.W, padx=5)
 
     def get_next_slide_model(self):
         file_path = tkFileDialog.askopenfilename(
@@ -52,20 +52,20 @@ class ModelSelect(tk.Frame):
             self.model_edit_callback()
 
     def disable(self):
-        self.next_model_button["state"] = tk.DISABLED
-        self.prev_model_button["state"] = tk.DISABLED
+        self.next_model_button["state"] = Tk.DISABLED
+        self.prev_model_button["state"] = Tk.DISABLED
 
     def enable(self):
-        self.next_model_button["state"] = tk.NORMAL
-        self.prev_model_button["state"] = tk.NORMAL
+        self.next_model_button["state"] = Tk.NORMAL
+        self.prev_model_button["state"] = Tk.NORMAL
 
 
-class DetectApp(tk.Frame):
+class DetectApp(Tk.Frame):
     """
     Frame for main app
     """
     def __init__(self, parent, models, sensitivity, recognition, callbacks):
-        tk.Frame.__init__(self, parent)
+        Tk.Frame.__init__(self, parent)
         self.models = models
         self.sensitivity = sensitivity
         self.recognition = recognition
@@ -75,9 +75,9 @@ class DetectApp(tk.Frame):
         self.grid()
 
     def init_ui(self):
-        tk.Grid.columnconfigure(self, 0, weight=1)
-        tk.Grid.columnconfigure(self, 1, weight=1)
-        self.toggle_button = tk.Button(
+        Tk.Grid.columnconfigure(self, 0, weight=1)
+        Tk.Grid.columnconfigure(self, 1, weight=1)
+        self.toggle_button = Tk.Button(
             self,
             text="Start Recognition",
             width=25,
@@ -87,13 +87,13 @@ class DetectApp(tk.Frame):
         self.toggle_button.grid(row=0, column=0, columnspan=2)
         self.model_select = ModelSelect(self, self.models, self.changed_models)
         self.model_select.grid(row=1, column=0, padx=50)
-        self.sensitivity_slider = tk.Scale(
+        self.sensitivity_slider = Tk.Scale(
             self,
             from_=100,
             to=0,
             command=self.changed_sensitivity,
             label="Sensitivity",
-            sliderrelief=tk.GROOVE
+            sliderrelief=Tk.GROOVE
         )
         self.sensitivity_slider.set(self.sensitivity * 100)
         self.sensitivity_slider.grid(row=1, column=1, padx=50)
@@ -128,10 +128,10 @@ class DetectApp(tk.Frame):
 
     def disable_config(self):
         self.model_select.disable()
-        self.sensitivity_slider["state"] = tk.DISABLED
+        self.sensitivity_slider["state"] = Tk.DISABLED
 
     def enable_config(self):
         self.model_select.enable()
-        self.sensitivity_slider["state"] = tk.NORMAL
+        self.sensitivity_slider["state"] = Tk.NORMAL
 
 

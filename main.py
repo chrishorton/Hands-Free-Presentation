@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-import Tkinter as tk
+import Tkinter as Tk
 from app import DetectApp
 import detectors
 import signal
 import pyautogui
 import json
-
 
 
 def left_key_press():
@@ -37,14 +36,14 @@ recognition = detectors.Detectors(models, sensitivity=sensitivity, resource=reso
 recognition.start()
 
 # Set up GUI
-root = tk.Tk()
+root = Tk.Tk()
 root.resizable(0, 0)  # Prevents resizing of GUI
 root.title("Hands-Free Presentation")
 app = DetectApp(root, models, sensitivity, recognition, callbacks)
 root.mainloop()  # Blocks until GUI is terminated
 
 # End recognition and its thread
-print("Terminating program")
+print("Closing application...")
 recognition.terminate()
 
 # Save configurations to config.json

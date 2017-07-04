@@ -48,10 +48,7 @@ print("Terminating program")
 recognition.terminate()
 
 # Save configurations to config.json
-config_data = {
-    "models": app.models,
-    "sensitivity": app.sensitivity,
-    "resource": resource
-}
+detection_data["models"] = app.models
+detection_data["sensitivity"] = app.sensitivity
 with open("config.json", "w") as json_file:
-    json.dump(config_data, json_file)
+    json.dump(detection_data, json_file)

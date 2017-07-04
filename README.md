@@ -53,3 +53,7 @@ After recording your three voice samples for either hotword, download the models
 To run the application, simply run the bash script `run.sh`. The first time this is run, it will automatically handle initial setup and configuration before running the application. Once the application launches, locate and select your two models through the user interface. At this point, you're all set! Before your presentations, start detection with the **Start detection** button, and stop detection in the same manner. You can also configure the sensitivity through the user interface. If the application is struggling to recognize the hotwords, raise the sensitivity. If it is detecting hotwords when you did not say any, lower the sensitivity.
 
 If you find this application useful, please show it to others and encourage them to try it out. It will greatly support our development.
+
+## Updates
+
+Development on this project is currently quite active, but there is no versioning yet. As a result, to get our latest updates to the project, you will need git installed. If you have git installed, and you downloaded the application through `git clone`, you can simply execute `git pull` within the directory of the application to pull the latest changes.

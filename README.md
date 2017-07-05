@@ -17,7 +17,7 @@ Snowboy's dependencies are documented [here](https://github.com/Kitt-AI/snowboy/
 
 Open up a terminal and run:
 ```bash
-brew install swig portaudio sox
+brew install portaudio sox
 pip install pyaudio
 pip install pyobjc-core
 pip install pyobjc
@@ -31,11 +31,7 @@ If you do not have Homebrew installed, please download it [here](http://brew.sh/
 
 Open up a terminal and run:
 ```bash
-sudo apt-get install swig3.0 sox portaudio19-dev
-pip install pyaudio
-sudo apt-get install libatlas-base-dev
-sudo apt-get install python-dev
-sudo apt-get install python-xlib python-tk
+sudo apt-get install sox python-pyaudio libatlas-base-dev python-dev python-xlib python-tk
 pip install pyautogui
 ```
 

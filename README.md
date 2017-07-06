@@ -47,6 +47,9 @@ To run the application, simply run the bash script `run.sh`. The first time this
 
 If you find this application useful, please show it to others and encourage them to try it out. It will greatly support our development.
 
+## Contributors
+Contributing to the project primarily is [Rohan Tibrewal](https://github.com/rohantib), along with Chris Horton.w
+
 ## Updates
 
 Development on this project is currently quite active, but there is no versioning yet. As a result, to get our latest updates to the project, you will need git installed. If you have git installed, and you downloaded the application through `git clone`, you can simply execute `git pull` within the directory of the application to pull the latest changes.

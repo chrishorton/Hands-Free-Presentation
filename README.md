@@ -18,10 +18,7 @@ Snowboy's dependencies are documented [here](https://github.com/Kitt-AI/snowboy/
 Open up a terminal and run:
 ```bash
 brew install portaudio sox
-pip install pyaudio
-pip install pyobjc-core
-pip install pyobjc
-pip install pyautogui
+pip install pyaudio pyobjc-core pyobjc pyautogui
 ```
 Depending on your system, you may have to run `sudo pip install` rather than `pip install`.
 
@@ -31,7 +28,7 @@ If you do not have Homebrew installed, please download it [here](http://brew.sh/
 
 Open up a terminal and run:
 ```bash
-sudo apt-get install sox python-pyaudio libatlas-base-dev python-dev python-xlib python-tk
+sudo apt-get install python-pip sox python-pyaudio libatlas-base-dev python-dev python-xlib
 pip install pyautogui
 ```
 
@@ -46,7 +43,7 @@ Since we do not have universal Snowboy models available yet, you need personal S
 
 After recording your three voice samples for either hotword, download the models for both hotwords. They should have a `.pmdl` extension. 
 
-To run the application, simply run the bash script `run.sh`. The first time this is run, it will automatically handle initial setup and configuration before running the application. Once the application launches, locate and select your two models through the user interface. At this point, you're all set! Before your presentations, start detection with the **Start detection** button, and stop detection in the same manner. You can also configure the sensitivity through the user interface. If the application is struggling to recognize the hotwords, raise the sensitivity. If it is detecting hotwords when you did not say any, lower the sensitivity.
+To run the application, simply run the bash script `run.sh`. The first time this is run, it will automatically handle initial setup and configuration before running the application. Once the application launches, locate and select your two models through the user interface. At this point, you're all set! Open up a presentation into full-screen, make sure you can move around slides with the arrow keys, start detection with the **Start detection** button, and stop detection in the same manner when you're done. You can also configure the sensitivity through the user interface. If the application is struggling to recognize the hotwords, raise the sensitivity. If it is detecting hotwords when you did not say any, lower the sensitivity.
 
 If you find this application useful, please show it to others and encourage them to try it out. It will greatly support our development.
 

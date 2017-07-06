@@ -6,12 +6,12 @@ A useful application that allows you to deliver presentations solely with your v
 * [Snowboy](https://snowboy.kitt.ai/) - hotword detection 
 * [PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/) - sending soft keypresses to manipulate presentations 
 
-Unfortunately, Snowboy currently is not supported on Windows, therefore making this application unavailable on Windows as of right now. However, if you are running OSX or an Ubuntu-based system, this application will work just fine. It may be possible to run on Windows by following the Ubuntu installation instructions using Bash on Windows, but that is currently untested.
+Unfortunately, Snowboy is currently not supported on Windows, therefore making this application unavailable on Windows as of right now. However, if you are running OSX or an Ubuntu-based system, this application will work just fine. It may be possible to run on Windows by following the Ubuntu installation instructions using Bash on Windows, but that is currently untested.
 
 
-Both Snowboy and PyAutoGUI require their own dependencies. Instructions for installation are listed below, or you can use the following links. 
+Both Snowboy and PyAutoGUI require their own dependencies. Instructions for installation on 64-bit Ubuntu-based distributions or OSX are listed further below, or you can use the following links. 
 
-Snowboy's dependencies are documented [here](https://github.com/Kitt-AI/snowboy/blob/master/README.md#dependencies), and PyAutoGUI's dependencies are found [here](https://pyautogui.readthedocs.io/en/latest/install.html#installation). However, since this application only uses Python 2, make sure to replace `pip3` with `pip` and `python3` with `python` in PyAutoGUI's installation instructions. The commands for installing dependencies are also written below.
+Snowboy's dependencies are documented [here](https://snowboy.kitt.ai/docs), and PyAutoGUI's dependencies are found [here](https://pyautogui.readthedocs.io/en/latest/install.html#installation). However, since this application currently only uses Python 2, make sure to replace `pip3` with `pip` and `python3` with `python` in PyAutoGUI's installation instructions. The commands for installing dependencies are also written below.
 
 **OSX Installation**
 

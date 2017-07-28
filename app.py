@@ -122,7 +122,7 @@ class DetectApp(Tk.Frame):
             self.toggle_button["text"] = "Stop Detection"
         else:
             print("Stopping recognition...")
-            self.recognition.stop_recog()
+            self.recognition.pause_recog()
             self.enable_config()
             self.toggle_button["text"] = "Start Detection"
 
@@ -133,5 +133,3 @@ class DetectApp(Tk.Frame):
     def enable_config(self):
         self.model_select.enable()
         self.sensitivity_slider["state"] = Tk.NORMAL
-
-

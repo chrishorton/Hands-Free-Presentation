@@ -32,7 +32,7 @@ models = detection_data["models"]
 sensitivity = detection_data["sensitivity"]
 resource = detection_data["resource"]
 callbacks = [right_key_press, left_key_press]
-recognition = detectors.Detectors(models, sensitivity=sensitivity, resource=resource)
+recognition = detectors.ThreadedDetector(models, sensitivity=sensitivity, resource=resource)
 recognition.start()
 
 # Set up GUI

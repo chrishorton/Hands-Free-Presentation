@@ -8,7 +8,7 @@ import threading
 import Queue
 
 
-class Detectors(threading.Thread):
+class ThreadedDetector(threading.Thread):
     """
     Wrapper class around detectors to run them in a separate thread
     and provide methods to pause, resume, and modify detection
@@ -16,8 +16,8 @@ class Detectors(threading.Thread):
 
     def __init__(self, models, **kwargs):
         """
-        Initialize Detectors object. **kwargs is for any __init__ keyword arguments to be passed into HotWordDetector
-        __init__() method.
+        Initialize Detectors object. **kwargs is for any __init__ keyword
+        arguments to be passed into HotWordDetector __init__() method.
         """
         threading.Thread.__init__(self)
         self.models = models
@@ -36,7 +36,8 @@ class Detectors(threading.Thread):
 
     def run(self):
         """
-        Runs in separate thread - waits on command to either run detectors or terminate thread from commands queue
+        Runs in separate thread - waits on command to either run detectors
+        or terminate thread from commands queue
         """
         try:
             while True:
@@ -63,15 +64,16 @@ class Detectors(threading.Thread):
 
     def start_recog(self, **kwargs):
         """
-        Starts recognition in thread. Accepts kwargs to pass into the HotWordDetector.start() method, but
-        does not accept interrupt_callback, as that is already set up.
+        Starts recognition in thread. Accepts kwargs to pass into the
+        HotWordDetector.start() method, but does not accept interrupt_callback,
+        as that is already set up.
         """
         assert "interrupt_check" not in kwargs, \
             "Cannot set interrupt_check argument. To interrupt detectors, use Detectors.stop_recog() instead"
         self.run_kwargs = kwargs
         self.commands.put("Start")
 
-    def stop_recog(self):
+    def pause_recog(self):
         """
         Halts recognition in thread.
         """
@@ -81,7 +83,7 @@ class Detectors(threading.Thread):
         """
         Terminates recognition thread - called when program terminates
         """
-        self.stop_recog()
+        self.pause_recog()
         self.commands.put("Terminate")
 
     def is_running(self):

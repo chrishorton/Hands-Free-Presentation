@@ -1,11 +1,11 @@
+import threading
+import Queue
 import sys
 with open(".snowboy_path", "r") as snowboy_dest:
     snowboy_package = snowboy_dest.read().strip()
     sys.path.append(snowboy_package)
 
 import snowboydecoder
-import threading
-import Queue
 
 
 class ThreadedDetector(threading.Thread):
